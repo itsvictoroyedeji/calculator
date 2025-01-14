@@ -1,3 +1,7 @@
+:root {
+  --box-contain-width: 382px;
+}
+
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -13,6 +17,7 @@ body {
   line-height: calc(1em + 0.5rem);
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+  text-align: center;
 }
 
 /* 5. Improve media defaults */
@@ -40,3 +45,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+#calculator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#container {
+  background-color: #0d1a1a;
+  border: 10px solid #0d1a1a;
+  border-radius: 31px;
+  display: flex;
+  flex-wrap: wrap;
+  width: var(--box-contain-width);
+  /* height: var(--box-contain-width); */
+  gap: 4px;
+  padding: 18px;
+}
+
+#main-display {
+  background-color: #f9b13f;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 3.3em;
+  padding: 23px 10px;
+  border-radius: 16px;
+  flex: 1;
+  margin: 6px 0 20px;
+}
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+button {
+  border-radius: 15px;
+  flex: 1 70px;
+  height: 54px;
+  font-size: 1.9em;
+}
