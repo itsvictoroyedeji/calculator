@@ -56,35 +56,42 @@ mainDisplay.textContent = 0;
 let displayNumber = [];
 let numberValue;
 
-// Display and Get each number after clicking the correct element
-const allDigitButtons = document.querySelectorAll(".operand");
+// Add Click event to all buttons
+const getAllButtonElements = document.querySelectorAll("button");
 
-allDigitButtons.forEach(button => 
+getAllButtonElements.forEach((button) => {
   button.addEventListener("click", getButtonValues)
-);
+});
 
+// Calculator logic
 function getButtonValues(e) {
-  // Add each value to displayNumber array
-  displayNumber.push(e.target.value);
+  switch(e.target.value) {
+    case '0':
+    case '1':
+    case '2':
+    case '3':
+    case '4':
+    case '5':
+    case '6':
+    case '7':
+    case '8':
+    case '9':
+      // Add each value to displayNumber array
+      displayNumber.push(e.target.value);
 
-  // Convert array value to number, then DISPLAY on calculator screen
-  mainDisplay.textContent = Number(displayNumber.join(""));
+      // Convert array value to number, then DISPLAY on calculator screen
+      mainDisplay.textContent = Number(displayNumber.join(""));
 
-  // Max length to display = 10
-  if (mainDisplay.textContent.length > 10) {
-    mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+      // Max length to display = 10
+      if (mainDisplay.textContent.length > 10) {
+        mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+      }
+
+      // Save value in a variable
+      numberValue = Number(mainDisplay.textContent);
+      break;
+
   }
-
-  // Save value in a variable
-  numberValue = Number(mainDisplay.textContent);
-};
-
-
-
-// let digitButtonValue = []; // create an array
-
-// user clicks button
-// get button value
-// add button value to display
-// save button value in variable
+  console.log(numberValue);
+}
 
