@@ -48,29 +48,43 @@ const operate = function (operator, num1, num2) {
 
 // Create a variable for the display, and assign to 0
 const mainDisplay = document.getElementById("main-display");
+
+// Display content is 0;
 mainDisplay.textContent = 0;
 
-// Create a variable that stores the display value
-let displayNumber;
+// Create an array that stores the display value
+let displayNumber = [];
+let numberValue;
 
 // Display and Get each number after clicking the correct element
 const allDigitButtons = document.querySelectorAll(".operand");
-let digitButtonValue = []; // create an array
 
-Array.from(allDigitButtons).forEach((button) => {
-  button.addEventListener("click", (e) => {
-    // push each clicked number to array
-    digitButtonValue.push(e.target.textContent);
+allDigitButtons.forEach(button => 
+  button.addEventListener("click", getButtonValues)
+);
 
-    // convert array to number and show on display screen
-    mainDisplay.textContent = Number(digitButtonValue.join(""));
+function getButtonValues(e) {
+  // Add each value to displayNumber array
+  displayNumber.push(e.target.value);
 
-    // Limit display to max 10 numbers
-    if (mainDisplay.textContent.length > 10) {
-      mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
-    }
+  // Convert array value to number, then DISPLAY on calculator screen
+  mainDisplay.textContent = Number(displayNumber.join(""));
 
-    // Save display number as a variable
-    displayNumber = Number(mainDisplay.textContent);
-  })
-});
+  // Max length to display = 10
+  if (mainDisplay.textContent.length > 10) {
+    mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+  }
+
+  // Save value in a variable
+  numberValue = Number(mainDisplay.textContent);
+};
+
+
+
+// let digitButtonValue = []; // create an array
+
+// user clicks button
+// get button value
+// add button value to display
+// save button value in variable
+
