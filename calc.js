@@ -46,9 +46,31 @@ const operate = function (operator, num1, num2) {
   return result;
 }
 
-// Limit Main Display to 10 characters
+// Create a variable for the display, and assign to 0
 const mainDisplay = document.getElementById("main-display");
+mainDisplay.textContent = 0;
 
-if (mainDisplay.textContent.length > 10) {
-  mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
-}
+// Create a variable that stores the display value
+let displayNumber;
+
+// Display and Get each number after clicking the correct element
+const allDigitButtons = document.querySelectorAll(".operand");
+let digitButtonValue = []; // create an array
+
+Array.from(allDigitButtons).forEach((button) => {
+  button.addEventListener("click", (e) => {
+    // push each clicked number to array
+    digitButtonValue.push(e.target.textContent);
+
+    // convert array to number and show on display screen
+    mainDisplay.textContent = Number(digitButtonValue.join(""));
+
+    // Limit display to max 10 numbers
+    if (mainDisplay.textContent.length > 10) {
+      mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+    }
+
+    // Save display number as a variable
+    displayNumber = Number(mainDisplay.textContent);
+  })
+});
