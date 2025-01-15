@@ -2,6 +2,92 @@
   --box-contain-width: 382px;
 }
 
+@font-face {
+  font-family: "Digital 7";
+  src: url('./digital-7/digital-7.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Digital 7";
+  src: url('./digital-7/digital-7-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Digital 7 Mono";
+  src: url('./digital-7/digital-7-mono.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Digital 7 Mono";
+  src: url('./digital-7/digital-7-mono-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lato-thin {
+  font-family: "Lato", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.lato-light {
+  font-family: "Lato", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.lato-regular {
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-bold {
+  font-family: "Lato", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lato-black {
+  font-family: "Lato", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.lato-thin-italic {
+  font-family: "Lato", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.lato-light-italic {
+  font-family: "Lato", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.lato-regular-italic {
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lato-bold-italic {
+  font-family: "Lato", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.lato-black-italic {
+  font-family: "Lato", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -61,20 +147,24 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   width: var(--box-contain-width);
-  /* height: var(--box-contain-width); */
   gap: 4px;
   padding: 18px;
+  margin: 0 15px;
 }
 
+
 #main-display {
+  font-family: "Digital 7", "Lato", serif;
+  font-weight: 400;
   background-color: #f9b13f;
   display: flex;
   justify-content: flex-end;
-  font-size: 3.3em;
-  padding: 23px 10px;
+  font-size: 3.8em;
+  padding: 15px 10px 27px 10px;
   border-radius: 16px;
   flex: 1;
   margin: 6px 0 20px;
+  letter-spacing: 1.8px;
 }
 
 #buttons {
@@ -85,7 +175,34 @@ h1, h2, h3, h4, h5, h6 {
 
 button {
   border-radius: 15px;
-  flex: 1 70px;
+  flex: 1 60px;
   height: 54px;
   font-size: 1.9em;
+  color: #fff;
+  background-color: #4b7069;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+button.operand {
+  background-color: #adc6c2;
+}
+
+button.clear {
+  background-color: #d7563b;
+}
+
+.clear {
+  font-size: 1.6em;
+}
+
+.decimal {
+  font-size: 1.6em;
+  padding-bottom: 3px;
+}
+
+@media (max-width: 360px) {
+  button {
+    flex: 1 56px;
+  }
 }
