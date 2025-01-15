@@ -46,3 +46,9 @@ const operate = function (operator, num1, num2) {
   return result;
 }
 
+// Limit Main Display to 10 characters
+const mainDisplay = document.getElementById("main-display");
+
+if (mainDisplay.textContent.length > 10) {
+  mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+}
