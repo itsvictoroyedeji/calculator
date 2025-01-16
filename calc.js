@@ -41,7 +41,6 @@ const operate = function(operator, num1, num2) {
       result = divide(num1, num2);
       break;
     default:
-      alert("Add +, -, x, or /");
   }
 
   return result;
@@ -142,9 +141,13 @@ function getButtonValues(e) {
       break;
       
     case '=': 
-      calculateNumbers();
+      if (operator == undefined) {
+        break;      
+      };
 
+      calculateNumbers();
       newCalculation = calculateNumbers();
+      operator = undefined;
       operation = [];
       operation = [newCalculation];
 
