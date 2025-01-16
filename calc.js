@@ -1,5 +1,6 @@
 // initialize numbers to operate on
 let number1, number2, operator, result;
+let operation = [];
 
 // add subtract multiply divide functions
 const add = function(...numbers) {
@@ -25,7 +26,7 @@ const divide = function(num1, ...numbers) {
 }
 
 // Operate on the numbers
-const operate = function (operator, num1, num2) {
+const operate = function(operator, num1, num2) {
   switch(operator) {
     case '+':
       result = add(num1, num2);
@@ -63,6 +64,12 @@ getAllButtonElements.forEach((button) => {
   button.addEventListener("click", getButtonValues)
 });
 
+let count = 0;
+let newCalculation;
+let subtractCount = 0;
+let multiplyCount = 0;
+let divideCount = 0;
+
 // Calculator logic
 function getButtonValues(e) {
   switch(e.target.value) {
@@ -76,22 +83,68 @@ function getButtonValues(e) {
     case '7':
     case '8':
     case '9':
-      // Add each value to displayNumber array
-      displayNumber.push(e.target.value);
+      let getNumber = function() {
+        // Add each value to displayNumber array
+        displayNumber.push(e.target.value);
 
-      // Convert array value to number, then DISPLAY on calculator screen
-      mainDisplay.textContent = Number(displayNumber.join(""));
+        // Convert array value to number, then DISPLAY on calculator screen
+        mainDisplay.textContent = Number(displayNumber.join(""));
 
-      // Max length to display = 10
-      if (mainDisplay.textContent.length > 10) {
-        mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
-      }
+        // Max length to display = 10
+        if (mainDisplay.textContent.length > 10) {
+          mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+        }
 
-      // Save value in a variable
-      numberValue = Number(mainDisplay.textContent);
+        // Store number value in a variable
+        numberValue = Number(mainDisplay.textContent);
+      };
+
+      getNumber();
+      count = 0;
+
       break;
 
+    case '+':
+      if (count === 0) {
+        operation.push(numberValue);
+        operator = e.target.value;
+        displayNumber = [];
+        count++;
+      } 
+      break;
+
+    case '-':
+      if (operation.length > 0) {
+        newCalculation = calculateNumbers();
+        operation = []
+        operation = [newCalculation];
+      } else if (count === 0) {
+        operation.push(numberValue);
+      } 
+
+      operator = e.target.value;
+      displayNumber = [];
+      count++;
+      break;
+
+    case '=':
+      function calculateNumbers() {
+        operation.push(numberValue);
+        [number1, number2] = operation;
+        mainDisplay.textContent = operate(operator, number1, number2);
+        // numberValue = 0;
+
+        return operate(operator, number1, number2);
+      }
+      
+      calculateNumbers();
+
+      newCalculation = calculateNumbers();
+      operation = [];
+      operation = [newCalculation];
   }
-  console.log(numberValue);
+
+  console.log(operation);
+  
 }
 
