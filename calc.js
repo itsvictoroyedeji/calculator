@@ -101,6 +101,17 @@ function getButtonValues(e) {
     return operate(operator, number1, number2);
   }
 
+  function clearData() {
+    operator = undefined;
+    count = 0;
+    operation = [];
+    displayNumber = [];
+    numberValue = 0;
+    number1 = undefined;
+    number2 = undefined;
+    result = undefined;
+  }
+
   switch(e.target.value) {
     case '0':
     case '1':
@@ -129,7 +140,6 @@ function getButtonValues(e) {
       };
 
       getNumber();
-      // count = 0;
 
       break;
 
@@ -147,6 +157,12 @@ function getButtonValues(e) {
 
       calculateNumbers();
       newCalculation = calculateNumbers();
+
+      if (mainDisplay.textContent === 'nope!' || mainDisplay.textContent === NaN) {
+        clearData();
+        break;
+      }
+
       operator = undefined;
       operation = [];
       operation = [newCalculation];
@@ -157,15 +173,9 @@ function getButtonValues(e) {
       break;
 
     case 'clear':
-      operator = undefined;
-      count = 0;
-      operation = [];
-      displayNumber = [];
-      numberValue = 0;
-      number1 = undefined;
-      number2 = undefined;
+      clearData();
       mainDisplay.textContent = 0;
-      result = undefined;
+      break;
   }
 
   console.log(displayNumber);
