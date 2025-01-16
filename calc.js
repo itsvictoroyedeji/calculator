@@ -66,12 +66,29 @@ getAllButtonElements.forEach((button) => {
 
 let count = 0;
 let newCalculation;
-let subtractCount = 0;
-let multiplyCount = 0;
-let divideCount = 0;
 
 // Calculator logic
 function getButtonValues(e) {
+
+  function getCalculation() {
+    if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+      operation;
+    } else if (operation.length > 0 && count === 1) {
+      newCalculation = calculateNumbers();
+      operation = [];
+      operation = [newCalculation];
+    } else if (operation.length === 0 && count === 0) {
+      operation.push(numberValue);
+    } else {
+      operation = [newCalculation]; 
+    }
+
+    operator = e.target.value;
+    displayNumber = [];
+    numberValue = 0;
+    count++;
+  }
+
   switch(e.target.value) {
     case '0':
     case '1':
@@ -100,40 +117,24 @@ function getButtonValues(e) {
       };
 
       getNumber();
-      count = 0;
+      // count = 0;
 
       break;
 
     case '+':
-      if (count === 0) {
-        operation.push(numberValue);
-        operator = e.target.value;
-        displayNumber = [];
-        count++;
-      } 
-      break;
-
     case '-':
-      if (operation.length > 0) {
-        newCalculation = calculateNumbers();
-        operation = []
-        operation = [newCalculation];
-      } else if (count === 0) {
-        operation.push(numberValue);
-      } 
-
-      operator = e.target.value;
-      displayNumber = [];
-      count++;
+    case 'x':
+    case '/':
+      getCalculation();
       break;
-
+      
     case '=':
       function calculateNumbers() {
         operation.push(numberValue);
         [number1, number2] = operation;
         mainDisplay.textContent = operate(operator, number1, number2);
-        // numberValue = 0;
-
+        count = 0;
+        numberValue = 0;
         return operate(operator, number1, number2);
       }
       
@@ -142,9 +143,12 @@ function getButtonValues(e) {
       newCalculation = calculateNumbers();
       operation = [];
       operation = [newCalculation];
+    break;
   }
 
-  console.log(operation);
+  console.log(displayNumber);
+  console.log(number1);
+  console.log(number2);
   
 }
 
