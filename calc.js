@@ -70,6 +70,38 @@ let newCalculation;
 // Calculator logic
 function getButtonValues(e) {
 
+  function getCalculation() {
+    if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+      operation;
+    } else if (operation.length > 0 && count === 1) {
+      newCalculation = calculateNumbers();
+      operation = [];
+      operation = [newCalculation];
+    } else if (operation.length === 0 && count === 0) {
+      operation.push(numberValue);
+    } else {
+      operation = [newCalculation]; 
+    }
+
+    if (operation.join("").length > 10) {
+      mainDisplay.textContent = Number(operation.join("")).toFixed(4);
+    }
+
+    operator = e.target.value;
+    displayNumber = [];
+    numberValue = 0;
+    count++;
+  }
+
+  function calculateNumbers() {
+    operation.push(numberValue);
+    [number1, number2] = operation;
+    mainDisplay.textContent = operate(operator, number1, number2);
+    count = 0;
+    numberValue = 0;
+    return operate(operator, number1, number2);
+  }
+
   switch(e.target.value) {
     case '0':
     case '1':
@@ -103,98 +135,22 @@ function getButtonValues(e) {
       break;
 
     case '+':
-      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
-        operation;
-      } else if (operation.length > 0 && count === 1) {
-        newCalculation = calculateNumbers();
-        operation = [];
-        operation = [newCalculation];
-      } else if (operation.length === 0 && count === 0) {
-        operation.push(numberValue);
-      } else {
-        operation = [newCalculation]; 
-      }
-  
-      operator = e.target.value;
-      displayNumber = [];
-      numberValue = 0;
-      count++;
-      break;
-
     case '-':
-      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
-        operation;
-      } else if (operation.length > 0 && count === 1) {
-        newCalculation = calculateNumbers();
-        operation = [];
-        operation = [newCalculation];
-      } else if (operation.length === 0 && count === 0) {
-        operation.push(numberValue);
-      } else {
-        operation = [newCalculation]; 
-      }
-  
-      operator = e.target.value;
-      displayNumber = [];
-      numberValue = 0;
-      count++;
-      break;
-
     case 'x':
-      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
-        operation;
-      } else if (operation.length > 0 && count === 1) {
-        newCalculation = calculateNumbers();
-        operation = [];
-        operation = [newCalculation];
-      } else if (operation.length === 0 && count === 0) {
-        operation.push(numberValue);
-      } else {
-        operation = [newCalculation]; 
-      }
-  
-      operator = e.target.value;
-      displayNumber = [];
-      numberValue = 0;
-      count++;
-      break;
-
     case '/':
-      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
-        operation;
-      } else if (operation.length > 0 && count === 1) {
-        newCalculation = calculateNumbers();
-        operation = [];
-        operation = [newCalculation];
-      } else if (operation.length === 0 && count === 0) {
-        operation.push(numberValue);
-      } else {
-        operation = [newCalculation]; 
-      }
-  
-      operator = e.target.value;
-      displayNumber = [];
-      numberValue = 0;
-      count++;
+      getCalculation();
       break;
       
-    case '=':
-      function calculateNumbers() {
-        operation.push(numberValue);
-        [number1, number2] = operation;
-        mainDisplay.textContent = operate(operator, number1, number2);
-        count = 0;
-        numberValue = 0;
-        return operate(operator, number1, number2);
-      }
-      
+    case '=': 
       calculateNumbers();
 
       newCalculation = calculateNumbers();
       operation = [];
       operation = [newCalculation];
 
-      
+      if (operation.join("").length > 10) {
+        mainDisplay.textContent = Number(operation.join("")).toFixed(4);
+      }
     break;
   }
 
