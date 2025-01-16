@@ -154,7 +154,18 @@ function getButtonValues(e) {
       if (operation.join("").length > 10) {
         mainDisplay.textContent = Number(operation.join("")).toFixed(4);
       }
-    break;
+      break;
+
+    case 'clear':
+      operator = undefined;
+      count = 0;
+      operation = [];
+      displayNumber = [];
+      numberValue = 0;
+      number1 = undefined;
+      number2 = undefined;
+      mainDisplay.textContent = 0;
+      result = undefined;
   }
 
   console.log(displayNumber);
