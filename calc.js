@@ -70,25 +70,6 @@ let newCalculation;
 // Calculator logic
 function getButtonValues(e) {
 
-  function getCalculation() {
-    if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
-      operation;
-    } else if (operation.length > 0 && count === 1) {
-      newCalculation = calculateNumbers();
-      operation = [];
-      operation = [newCalculation];
-    } else if (operation.length === 0 && count === 0) {
-      operation.push(numberValue);
-    } else {
-      operation = [newCalculation]; 
-    }
-
-    operator = e.target.value;
-    displayNumber = [];
-    numberValue = 0;
-    count++;
-  }
-
   switch(e.target.value) {
     case '0':
     case '1':
@@ -122,10 +103,79 @@ function getButtonValues(e) {
       break;
 
     case '+':
+      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+        operation;
+      } else if (operation.length > 0 && count === 1) {
+        newCalculation = calculateNumbers();
+        operation = [];
+        operation = [newCalculation];
+      } else if (operation.length === 0 && count === 0) {
+        operation.push(numberValue);
+      } else {
+        operation = [newCalculation]; 
+      }
+  
+      operator = e.target.value;
+      displayNumber = [];
+      numberValue = 0;
+      count++;
+      break;
+
     case '-':
+      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+        operation;
+      } else if (operation.length > 0 && count === 1) {
+        newCalculation = calculateNumbers();
+        operation = [];
+        operation = [newCalculation];
+      } else if (operation.length === 0 && count === 0) {
+        operation.push(numberValue);
+      } else {
+        operation = [newCalculation]; 
+      }
+  
+      operator = e.target.value;
+      displayNumber = [];
+      numberValue = 0;
+      count++;
+      break;
+
     case 'x':
+      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+        operation;
+      } else if (operation.length > 0 && count === 1) {
+        newCalculation = calculateNumbers();
+        operation = [];
+        operation = [newCalculation];
+      } else if (operation.length === 0 && count === 0) {
+        operation.push(numberValue);
+      } else {
+        operation = [newCalculation]; 
+      }
+  
+      operator = e.target.value;
+      displayNumber = [];
+      numberValue = 0;
+      count++;
+      break;
+
     case '/':
-      getCalculation();
+      if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
+        operation;
+      } else if (operation.length > 0 && count === 1) {
+        newCalculation = calculateNumbers();
+        operation = [];
+        operation = [newCalculation];
+      } else if (operation.length === 0 && count === 0) {
+        operation.push(numberValue);
+      } else {
+        operation = [newCalculation]; 
+      }
+  
+      operator = e.target.value;
+      displayNumber = [];
+      numberValue = 0;
+      count++;
       break;
       
     case '=':
@@ -143,12 +193,16 @@ function getButtonValues(e) {
       newCalculation = calculateNumbers();
       operation = [];
       operation = [newCalculation];
+
+      
     break;
   }
 
   console.log(displayNumber);
   console.log(number1);
   console.log(number2);
-  
+  console.log(operation);
+ 
 }
+
 
