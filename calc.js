@@ -65,6 +65,7 @@ getAllButtonElements.forEach((button) => {
 
 let count = 0;
 let newCalculation;
+let decimalCount = 0;
 
 // Calculator logic
 function getButtonValues(e) {
@@ -88,6 +89,7 @@ function getButtonValues(e) {
 
     operator = e.target.value;
     displayNumber = [];
+    decimalCount = 0;
     numberValue = 0;
     count++;
   }
@@ -95,11 +97,12 @@ function getButtonValues(e) {
   function calculateNumbers() {
     operation.push(numberValue);
     [number1, number2] = operation;
-    mainDisplay.textContent = operate(operator, number1, number2);
+    mainDisplay.textContent = operate(operator, number1, number2); 
     count = 0;
     numberValue = 0;
     // reset for new equation
     displayNumber = [];
+    decimalCount = 0;
     return operate(operator, number1, number2);
   }
 
@@ -109,6 +112,7 @@ function getButtonValues(e) {
     operation = [];
     displayNumber = [];
     numberValue = 0;
+    decimalCount = 0;
     number1 = undefined;
     number2 = undefined;
     result = undefined;
@@ -125,19 +129,32 @@ function getButtonValues(e) {
     case '7':
     case '8':
     case '9':
+    case '.':
       let getNumber = function() {
         // Resets numbers if a brand new operation starts)
         if (operator === undefined) {
           operation = [];
-        }
+        };
         
         // Add each value to displayNumber array
         displayNumber.push(e.target.value);
 
-        // Convert array value to number, then DISPLAY on calculator screen
-        mainDisplay.textContent = Number(displayNumber.join(""));
+        // Don't allow more than one decimal point
+        if (decimalCount === 0) {
+          if (displayNumber.includes('.')) {
+            decimalCount++;
+          }
+        } else if (decimalCount > 0) {
+          if (e.target.value === '.') {
+            // Cuts off 2nd decimal in array
+            displayNumber.splice(-1,1);
+          }
+        }
 
-        // Max length to display = 10
+        // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
+        mainDisplay.textContent = displayNumber.join("");
+
+        // Max length to display = 10. Cut off everything after
         if (mainDisplay.textContent.length > 10) {
           mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
         }
@@ -183,7 +200,7 @@ function getButtonValues(e) {
       mainDisplay.textContent = 0;
       break;
   }
-
+  console.log("decimal count: " + decimalCount)
   console.log(displayNumber);
   console.log(numberValue);
   console.log(number1);
@@ -194,6 +211,7 @@ function getButtonValues(e) {
 
 // Final tasks:
 // users can add only one decimal number
+// remove trailing zero from answer (30.2 + 32.4)
 // the other 3 buttons (sq root, percentage and +/- all work)
 // all buttons highlight when clicked (mouse down)
 // but all operator buttons stay highlight when clicked (toggle highlight class)
