@@ -2,23 +2,24 @@
 let number1, number2, operator, result;
 let operation = [];
 
-// add subtract multiply divide functions
+// add subtract multiply divide functions (takes account using decimals)
 const add = function(...numbers) {
-  return numbers.reduce((total, num) => total + num, 0)
+  return numbers.reduce((total, num) => Math.round((total + num) * 1e12) / 1e12, 0)
 };
 
-const subtract = function(num1, ...numbers) {
-  return num1 - numbers.reduce((total, num) => total + num, 0);
+const subtract = function(num1, num2) {
+  return Math.round((num1 - num2) * 1e12) / 1e12
 };
 
 const multiply = function(...numbers) {
-  return numbers.reduce((total, item) => total * item, 1)
+  return numbers.reduce((total, num) => Math.round((total * num) * 1e12) / 1e12, 1)
 };
 
-const divide = function(num1, ...numbers) {
-  let answer = num1 / numbers.reduce((total, num) => total + num, 0);
+const divide = function(num1, num2) {
+  let answer = Math.round((num1 / num2) * 1e12) / 1e12;
 
-  if (answer === Infinity) {
+// Change numbers divisible by zero to "nope"
+if (answer === Infinity) {
     answer = "nope!"
   }
 
@@ -87,6 +88,11 @@ function getButtonValues(e) {
       mainDisplay.textContent = Number(operation.join("")).toFixed(4);
     }
 
+    // Reduce Big Numbers more than 10 digits
+    if (Number(operation.join("")) > 1000000000) {
+      mainDisplay.textContent = Number(operation.join("")).toExponential(4);
+    }
+
     operator = e.target.value;
     displayNumber = [];
     decimalCount = 0;
@@ -97,6 +103,7 @@ function getButtonValues(e) {
   function calculateNumbers() {
     operation.push(numberValue);
     [number1, number2] = operation;
+
     mainDisplay.textContent = operate(operator, number1, number2); 
     count = 0;
     numberValue = 0;
@@ -193,6 +200,12 @@ function getButtonValues(e) {
       if (operation.join("").length > 10) {
         mainDisplay.textContent = Number(operation.join("")).toFixed(4);
       }
+
+      // Reduce Big Numbers more than 10 digits
+      if (Number(operation.join("")) > 1000000000) {
+        mainDisplay.textContent = Number(operation.join("")).toExponential(4);
+      }
+
       break;
 
     case 'clear':
@@ -207,11 +220,11 @@ function getButtonValues(e) {
   console.log(number2);
   console.log(operation);
   console.log(operator);
+  console.log(mainDisplay.textContent);
  
 }
 
 // Final tasks:
-// remove trailing zero from answer (30.2 + 32.4)
 // the other 3 buttons (sq root, percentage and +/- all work)
 // all buttons highlight when clicked (mouse down)
 // but all operator buttons stay highlight when clicked (toggle highlight class)
