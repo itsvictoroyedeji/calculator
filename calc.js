@@ -98,6 +98,8 @@ function getButtonValues(e) {
     mainDisplay.textContent = operate(operator, number1, number2);
     count = 0;
     numberValue = 0;
+    // reset for new equation
+    displayNumber = [];
     return operate(operator, number1, number2);
   }
 
@@ -124,6 +126,11 @@ function getButtonValues(e) {
     case '8':
     case '9':
       let getNumber = function() {
+        // Resets numbers if a brand new operation starts)
+        if (operator === undefined) {
+          operation = [];
+        }
+        
         // Add each value to displayNumber array
         displayNumber.push(e.target.value);
 
@@ -140,7 +147,6 @@ function getButtonValues(e) {
       };
 
       getNumber();
-
       break;
 
     case '+':
@@ -179,10 +185,18 @@ function getButtonValues(e) {
   }
 
   console.log(displayNumber);
+  console.log(numberValue);
   console.log(number1);
   console.log(number2);
   console.log(operation);
  
 }
+
+// Final tasks:
+// users can add only one decimal number
+// the other 3 buttons (sq root, percentage and +/- all work)
+// all buttons highlight when clicked (mouse down)
+// but all operator buttons stay highlight when clicked (toggle highlight class)
+// attach data keys to buttons! for keyboard support
 
 
