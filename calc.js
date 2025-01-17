@@ -42,7 +42,7 @@ const operate = function(operator, num1, num2) {
       break;
     default:
   }
-
+ 
   return result;
 }
 
@@ -178,7 +178,7 @@ function getButtonValues(e) {
         break;      
       };
 
-      calculateNumbers();
+      // run calculation
       newCalculation = calculateNumbers();
 
       if (mainDisplay.textContent === 'nope!' || mainDisplay.textContent === NaN) {
@@ -206,11 +206,11 @@ function getButtonValues(e) {
   console.log(number1);
   console.log(number2);
   console.log(operation);
+  console.log(operator);
  
 }
 
 // Final tasks:
-// users can add only one decimal number
 // remove trailing zero from answer (30.2 + 32.4)
 // the other 3 buttons (sq root, percentage and +/- all work)
 // all buttons highlight when clicked (mouse down)
