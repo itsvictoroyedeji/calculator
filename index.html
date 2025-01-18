@@ -12,7 +12,7 @@
 <body class="lato-black">
   <div id="calculator">
     <div id="container">
-      <div id="main-display" maxlength="10"></div>
+      <div id="main-display" data-key="Backspace" maxlength="10"></div>
       <div id="buttons">
         <button type="button" data-key="" class="sqroot" value="sqroot">√ </button>
         <button type="button" data-key="" class="percent" value="percent">%</button>
@@ -34,6 +34,7 @@
         <button type="button" data-key="Period" class="decimal" value=".">•</button>
         <button type="button" data-key="Enter" class="equals" value="=">=</button>
         <button type="button" data-key="Equal" class="operator" value="+">+</button>
+        <button hidden type="button" data-key="Backspace" class="operator" value="backspace"></button>
       </div>
       
     </div>

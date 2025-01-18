@@ -1,16 +1,19 @@
 // Keyboard support for the calculator!
 let keyVersion;
+let backspaceButton;
 
 window.addEventListener("keydown", getKeyboardValues);
 
-// Calculator logic
+// Calculator logic for KEYBOARDS!!!
 function getKeyboardValues(e) {
 
+  // Get keyboard value from html elements
   keyVersion = document.querySelector(`button[data-key="${e.code}"]`);
+  
   if (keyVersion == null) return; // prevents null errors
   keyValue = keyVersion.value;
-  
-  console.log(keyValue);
+
+  console.error(keyValue);
 
   // Remove operator highlight class if equal button is entered
   if (keyVersion === '=') {
@@ -96,14 +99,28 @@ function getKeyboardValues(e) {
     case '8':
     case '9':
     case '.':
+    case 'backspace':
       let getNumber = function() {
         // Resets numbers if a brand new operation starts)
         if (operator === undefined) {
           operation = [];
         };
 
+        // Removes element if Backspace is selected
+        if (keyValue === 'backspace') {
+          if (displayNumber.length > 1) {
+            displayNumber.splice(-1,1);
+
+          } else {
+            console.error("It's zero");
+            displayNumber = [];
+            mainDisplay.textContent = 0;
+          }
+          
+        } else {
         // Add each value to displayNumber array
         displayNumber.push(keyValue);
+        }
 
         // Don't allow more than one decimal point
         if (decimalCount === 0) {
@@ -115,18 +132,18 @@ function getKeyboardValues(e) {
             // Cuts off 2nd decimal in array
             displayNumber.splice(-1,1);
           }
-        }
-
-        // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
-        mainDisplay.textContent = displayNumber.join("");
-
-        // Max length to display = 10. Cut off everything after
-        if (mainDisplay.textContent.length > 10) {
-          mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
-        }
+        };
 
         // Store number value in a variable
-        numberValue = Number(mainDisplay.textContent);
+        numberValue = Number(displayNumber.join(""));
+
+        // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
+        mainDisplay.textContent = numberValue;
+
+        // Max length to display = 10. Cut off everything after
+        if (displayNumber.join("").length > 10) {
+          mainDisplay.textContent = displayNumber.join("").substring(0,10);
+        }
       };
 
       getNumber();
@@ -285,14 +302,14 @@ function getKeyboardValues(e) {
 
     break;
   }
-  // console.error("decimal count: " + decimalCount)
-  // console.log(displayNumber);
-  // console.log("numberValue: " + numberValue);
-  // console.log(number1);
-  // console.log(number2);
-  // console.log(operation);
-  // console.log("operator: " + operator);
-  // console.log(mainDisplay.textContent);
-  // console.log("newCalculation: " + newCalculation);
-  // console.log("percentCount: "+ percentCount);
+  console.error("decimal count: " + decimalCount)
+  console.log(displayNumber);
+  console.log("numberValue: " + numberValue);
+  console.log(number1);
+  console.log(number2);
+  console.log(operation);
+  console.log("operator: " + operator);
+  console.log(mainDisplay.textContent);
+  console.log("newCalculation: " + newCalculation);
+  console.log("percentCount: "+ percentCount);
 }

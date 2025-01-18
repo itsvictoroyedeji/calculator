@@ -62,7 +62,6 @@ const getAllButtonElements = document.querySelectorAll("button");
 
 getAllButtonElements.forEach((button) => {
   button.addEventListener("click", getButtonValues);
-
 });
 
 let count = 0;
@@ -74,7 +73,7 @@ let splitOperation;
 let squareRoot;
 
 
-// Calculator logic
+// Calculator logic for BUTTONS!
 function getButtonValues(e) {
 
   function getCalculation() {
@@ -343,16 +342,16 @@ function getButtonValues(e) {
 
     break;
   }
-  // console.error("decimal count: " + decimalCount)
-  // console.log(displayNumber);
-  // console.log("numberValue: " + numberValue);
-  // console.log(number1);
-  // console.log(number2);
-  // console.log(operation);
-  // console.log("operator: " + operator);
-  // console.log(mainDisplay.textContent);
-  // console.log("newCalculation: " + newCalculation);
-  // console.log("percentCount: "+ percentCount);
+  console.error("decimal count: " + decimalCount)
+  console.log(displayNumber);
+  console.log("numberValue: " + numberValue);
+  console.log(number1);
+  console.log(number2);
+  console.log(operation);
+  console.log("operator: " + operator);
+  console.log(mainDisplay.textContent);
+  console.log("newCalculation: " + newCalculation);
+  console.log("percentCount: "+ percentCount);
 
 }
 
