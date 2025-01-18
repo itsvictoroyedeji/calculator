@@ -1,6 +1,5 @@
 // Keyboard support for the calculator!
 let keyVersion;
-let backspaceButton;
 
 window.addEventListener("keydown", getKeyboardValues);
 
@@ -85,6 +84,7 @@ function getKeyboardValues(e) {
     splitOperation = [];
     newCalculation = 0;
     squareRoot = undefined;
+    keyVersion = undefined;
   }
 
   switch(keyValue) {
@@ -114,6 +114,7 @@ function getKeyboardValues(e) {
           } else {
             console.error("It's zero");
             displayNumber = [];
+            // Display 0 on screen after all numbers have been removed
             mainDisplay.textContent = 0;
           }
           
@@ -134,17 +135,17 @@ function getKeyboardValues(e) {
           }
         };
 
-        // Store number value in a variable
+        // Store number value in a variable, first!
         numberValue = Number(displayNumber.join(""));
 
-        // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
+        // Display that value
         mainDisplay.textContent = numberValue;
 
         // Max length to display = 10. Cut off everything after
         if (displayNumber.join("").length > 10) {
           mainDisplay.textContent = displayNumber.join("").substring(0,10);
 
-          // Store number value in a variable
+          // And Store updated number value in a variable
            numberValue = Number(displayNumber.join("").substring(0,10));
         }
       };
