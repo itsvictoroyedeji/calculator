@@ -185,7 +185,7 @@ function getButtonValues(e) {
         break;      
       };
 
-      // run calculation
+      // run calculation AND store in variable
       newCalculation = calculateNumbers();
 
       if (mainDisplay.textContent === 'nope!' || mainDisplay.textContent === NaN) {
@@ -198,12 +198,12 @@ function getButtonValues(e) {
       operation = [newCalculation];
 
       if (operation.join("").length > 10) {
-        mainDisplay.textContent = Number(operation.join("")).toFixed(4);
+        mainDisplay.textContent = newCalculation.toFixed(4);
       }
 
       // Reduce Big Numbers more than 10 digits
-      if (Number(operation.join("")) > 1000000000) {
-        mainDisplay.textContent = Number(operation.join("")).toExponential(4);
+      if (newCalculation > 1000000000) {
+        mainDisplay.textContent = newCalculation.toExponential(4);
       }
 
       break;
@@ -211,6 +211,36 @@ function getButtonValues(e) {
     case 'clear':
       clearData();
       mainDisplay.textContent = 0;
+      break;
+
+    case 'sqroot':
+      // Code to execute after = is pressed.
+      if (displayNumber.length == []) {
+        newCalculation = Math.sqrt(newCalculation);
+        operation = [newCalculation];
+        mainDisplay.textContent = operation;
+
+        if (operation.join("").length > 10) {
+          mainDisplay.textContent = Number(operation.join("")).toFixed(4);
+        }
+        
+      } else {
+      // Code to execute while inputting number
+      displayNumber = [];
+      displayNumber.push(Math.sqrt(numberValue));
+
+      // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
+      mainDisplay.textContent = displayNumber.join("");
+
+      // Max length to display = 10. Cut off everything after
+      if (mainDisplay.textContent.length > 10) {
+        mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+      }
+
+      // Store number value in a variable
+      numberValue = Number(mainDisplay.textContent);
+      }
+
       break;
   }
   console.log("decimal count: " + decimalCount)
@@ -221,6 +251,7 @@ function getButtonValues(e) {
   console.log(operation);
   console.log(operator);
   console.log(mainDisplay.textContent);
+  console.log(newCalculation);
  
 }
 
