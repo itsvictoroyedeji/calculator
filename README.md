@@ -10,4 +10,4 @@ Have fun!
 
 [1]: https://www.istockphoto.com/vector/retro-calculator-illustration-gm1438106244-478706457
 [2]: https://mrbuddh4.github.io/calculator/
-[3]: https://itsvictoroyedeji.github.io/rock-paper-scissors/
+[3]: https://itsvictoroyedeji.github.io/calculator/
