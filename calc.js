@@ -69,6 +69,8 @@ let newCalculation;
 let decimalCount = 0;
 let decimalPercent;
 let percentCount = 0;
+let splitOperation;
+let squareRoot;
 
 // Calculator logic
 function getButtonValues(e) {
@@ -133,6 +135,9 @@ function getButtonValues(e) {
     number2 = undefined;
     result = undefined;
     percentCount = 0;
+    splitOperation = [];
+    newCalculation = 0;
+    squareRoot = undefined;
   }
 
   switch(e.target.value) {
@@ -230,8 +235,9 @@ function getButtonValues(e) {
     case 'sqroot':
       // Code to execute after = is pressed.
       if (displayNumber.length == 0) {
-        newCalculation = Math.sqrt(newCalculation);
-        operation = [newCalculation];
+        squareRoot = Math.sqrt(newCalculation);
+        newCalculation = squareRoot;
+        operation = [squareRoot];
         mainDisplay.textContent = operation;
 
         if (operation.join("").length > 10) {
@@ -285,10 +291,11 @@ function getButtonValues(e) {
           }
           // Calculate the percentage of the main number
           numberValue = Number(operation) * decimalPercent;
+
         } else {
-          console.log("hey there!");
           numberValue = Number(operation * 0.01);
           mainDisplay.textContent = Number(numberValue);
+          newCalculation = Number(numberValue);
           operation = [numberValue];
 
           if (mainDisplay.textContent.length > 10) {
@@ -298,7 +305,41 @@ function getButtonValues(e) {
       }
 
       break;
+    
+    case 'sign':
+      // Code to execute after = is pressed.
+      if (operation.length !== 0 && numberValue == 0 ) {
+        if (Number(operation) > 0) {
+          splitOperation = String(operation).split("");
+          splitOperation.unshift("-");
+          mainDisplay.textContent = Number(splitOperation.join(""));
 
+          newCalculation = Number(splitOperation.join(""));
+          operation = [newCalculation];
+
+        } else if (Number(operation) < 0) {
+          splitOperation = String(operation).split("");
+          splitOperation.splice(0,1);
+          mainDisplay.textContent = Number(splitOperation.join(""));
+
+          newCalculation = Number(splitOperation.join(""));
+          operation = [newCalculation];
+        }
+      // Code to execute before = is pressed.
+      } else if (Number(displayNumber.join("")) >= 0) {
+        // make number negative
+        displayNumber.unshift("-");
+        mainDisplay.textContent = displayNumber.join("");
+        numberValue = Number(mainDisplay.textContent);
+
+      } else if (Number(displayNumber.join("")) < 0) {
+        // make number positive
+        displayNumber.shift();
+        mainDisplay.textContent = displayNumber.join("");
+        numberValue = Number(mainDisplay.textContent);
+      }
+
+    break;
   }
   console.error("decimal count: " + decimalCount)
   console.log(displayNumber);
@@ -314,7 +355,6 @@ function getButtonValues(e) {
 }
 
 // Final tasks:
-// the other 1 buttons (  +/-  works)
 // all buttons highlight when clicked (mouse down)
 // but all operator buttons stay highlight when clicked (toggle highlight class)
 // attach data keys to buttons! for keyboard support
