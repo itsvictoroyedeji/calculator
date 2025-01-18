@@ -238,7 +238,7 @@ function getButtonValues(e) {
         squareRoot = Math.sqrt(newCalculation);
         newCalculation = squareRoot;
         operation = [squareRoot];
-        mainDisplay.textContent = operation;
+        mainDisplay.textContent = Number(operation);
 
         if (operation.join("").length > 10) {
           mainDisplay.textContent = Number(operation.join("")).toFixed(4);
@@ -354,9 +354,62 @@ function getButtonValues(e) {
  
 }
 
+// group buttons!
+const numberButtons = document.querySelectorAll(".operand");
+const operatorButtons = document.querySelectorAll(".operator");
+const decimalButton = document.querySelector(".decimal");
+const equalsButton = document.querySelector(".equals");
+const signButton = document.querySelector(".sign");
+const clearButton = document.querySelector(".clear");
+const percentButton = document.querySelector(".percent");
+const sqrootButton = document.querySelector(".sqroot");
+
+// Highlight each button 
+numberButtons.forEach((button) => {
+  button.addEventListener("mousedown", buttonPressed);
+  button.addEventListener("mouseup", buttonPressed)
+});
+
+const groupButtons = [decimalButton, equalsButton, signButton, clearButton, percentButton, sqrootButton];
+
+groupButtons.forEach((button) => {
+  button.addEventListener("mousedown", buttonPressed);
+  button.addEventListener("mouseup", buttonPressed)
+
+});
+
+function buttonPressed(e) {
+  e.target.classList.toggle("click-highlight");
+
+  // Remove operator highlight class if equal button is click
+  if (e.target.value === '=') {
+    operatorButtons.forEach((button) => {
+      button.classList.remove("click-highlight");
+    })
+  }
+}
+
+// // A longer highlight for operator buttons, while each one clicks after another.
+
+// Source of this code: https://jsfiddle.net/giuseppe_straziota/s6s0yb2k/
+
+(function() {
+
+  for (var i = 0; i < operatorButtons.length; i++) { 
+    var button = operatorButtons[i]; 
+    button.addEventListener('click', function (e) { 
+      for (var i = 0; i < operatorButtons.length; i++) {
+ 				var button2 = operatorButtons[i];
+        button2.classList.remove("click-highlight");
+      } 
+      this.classList.toggle("click-highlight");  
+    });
+  }
+
+})();
+
+
 // Final tasks:
-// all buttons highlight when clicked (mouse down)
-// but all operator buttons stay highlight when clicked (toggle highlight class)
 // attach data keys to buttons! for keyboard support
 
 

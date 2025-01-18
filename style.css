@@ -201,6 +201,10 @@ button.clear {
   padding-bottom: 3px;
 }
 
+button.click-highlight {
+  background-color: #f9b13f;
+}
+
 @media (max-width: 360px) {
   button {
     flex: 1 56px;
