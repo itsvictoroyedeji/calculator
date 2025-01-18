@@ -67,6 +67,8 @@ getAllButtonElements.forEach((button) => {
 let count = 0;
 let newCalculation;
 let decimalCount = 0;
+let decimalPercent;
+let percentCount = 0;
 
 // Calculator logic
 function getButtonValues(e) {
@@ -88,6 +90,10 @@ function getButtonValues(e) {
       mainDisplay.textContent = Number(operation.join("")).toFixed(4);
     }
 
+    if (operation.join("").length > 10) {
+      mainDisplay.textContent = operation.join("").substring(0,10);
+    }
+
     // Reduce Big Numbers more than 10 digits
     if (Number(operation.join("")) > 1000000000) {
       mainDisplay.textContent = Number(operation.join("")).toExponential(4);
@@ -97,6 +103,7 @@ function getButtonValues(e) {
     displayNumber = [];
     decimalCount = 0;
     numberValue = 0;
+    percentCount = 0;
     count++;
   }
 
@@ -110,6 +117,7 @@ function getButtonValues(e) {
     // reset for new equation
     displayNumber = [];
     decimalCount = 0;
+    percentCount = 0;
     return operate(operator, number1, number2);
   }
 
@@ -120,9 +128,11 @@ function getButtonValues(e) {
     displayNumber = [];
     numberValue = 0;
     decimalCount = 0;
+    decimalPercent = undefined;
     number1 = undefined;
     number2 = undefined;
     result = undefined;
+    percentCount = 0;
   }
 
   switch(e.target.value) {
@@ -201,6 +211,10 @@ function getButtonValues(e) {
         mainDisplay.textContent = newCalculation.toFixed(4);
       }
 
+      if (operation.join("").length > 10) {
+        mainDisplay.textContent = operation.join("").substring(0,10);
+      }
+
       // Reduce Big Numbers more than 10 digits
       if (newCalculation > 1000000000) {
         mainDisplay.textContent = newCalculation.toExponential(4);
@@ -215,7 +229,7 @@ function getButtonValues(e) {
 
     case 'sqroot':
       // Code to execute after = is pressed.
-      if (displayNumber.length == []) {
+      if (displayNumber.length == 0) {
         newCalculation = Math.sqrt(newCalculation);
         operation = [newCalculation];
         mainDisplay.textContent = operation;
@@ -240,23 +254,67 @@ function getButtonValues(e) {
       // Store number value in a variable
       numberValue = Number(mainDisplay.textContent);
       }
+      break;
+
+    case 'percent':
+      percentCount++;
+
+      if (percentCount < 4) {
+        if (operation.length === 0) {
+          // Code to execute before any operator (+,-,*,/)
+          displayNumber = []
+          displayNumber.push((numberValue * 0.01));
+  
+          mainDisplay.textContent = displayNumber.join("");
+
+          if (mainDisplay.textContent.length > 10) {
+            mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+          }
+
+          // Store number value in a variable
+          numberValue = Number(mainDisplay.textContent);
+
+        } else if (operator !== undefined) {
+          // Code to execute after operator is pushed (+,-,*,/)
+          decimalPercent = Number(displayNumber.join("")) * 0.01;
+
+          mainDisplay.textContent = `${displayNumber.join("")}%`;
+          
+          if (mainDisplay.textContent.length > 9) {
+            mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+          }
+          // Calculate the percentage of the main number
+          numberValue = Number(operation) * decimalPercent;
+        } else {
+          console.log("hey there!");
+          numberValue = Number(operation * 0.01);
+          mainDisplay.textContent = Number(numberValue);
+          operation = [numberValue];
+
+          if (mainDisplay.textContent.length > 10) {
+            mainDisplay.textContent = Number(mainDisplay.textContent).toFixed(5);
+          }
+        }
+      }
 
       break;
+
   }
-  console.log("decimal count: " + decimalCount)
+  console.error("decimal count: " + decimalCount)
   console.log(displayNumber);
-  console.log(numberValue);
+  console.log("numberValue: " + numberValue);
   console.log(number1);
   console.log(number2);
   console.log(operation);
-  console.log(operator);
+  console.log("operator: " + operator);
   console.log(mainDisplay.textContent);
-  console.log(newCalculation);
+  console.log("newCalculation: " + newCalculation);
+  console.log("percentCount: "+ percentCount);
  
 }
 
 // Final tasks:
-// the other 3 buttons (sq root, percentage and +/- all work)
+// the other 1 buttons (  +/-  works)
 // all buttons highlight when clicked (mouse down)
 // but all operator buttons stay highlight when clicked (toggle highlight class)
 // attach data keys to buttons! for keyboard support
