@@ -6,8 +6,6 @@ Here was my design [inspiration][1]. Here was my functionality [inspo][2].
 
 Have fun!
 
-- Victor
-
 
 
 [1]: https://www.istockphoto.com/vector/retro-calculator-illustration-gm1438106244-478706457
