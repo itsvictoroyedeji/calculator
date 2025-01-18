@@ -143,6 +143,9 @@ function getKeyboardValues(e) {
         // Max length to display = 10. Cut off everything after
         if (displayNumber.join("").length > 10) {
           mainDisplay.textContent = displayNumber.join("").substring(0,10);
+
+          // Store number value in a variable
+           numberValue = Number(displayNumber.join("").substring(0,10));
         }
       };
 
