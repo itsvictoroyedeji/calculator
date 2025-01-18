@@ -1,79 +1,23 @@
-// initialize numbers to operate on
-let number1, number2, operator, result;
-let operation = [];
+// Keyboard support for the calculator!
+let keyVersion;
 
-// add subtract multiply divide functions (takes account using decimals)
-const add = function(...numbers) {
-  return numbers.reduce((total, num) => Math.round((total + num) * 1e12) / 1e12, 0)
-};
-
-const subtract = function(num1, num2) {
-  return Math.round((num1 - num2) * 1e12) / 1e12
-};
-
-const multiply = function(...numbers) {
-  return numbers.reduce((total, num) => Math.round((total * num) * 1e12) / 1e12, 1)
-};
-
-const divide = function(num1, num2) {
-  let answer = Math.round((num1 / num2) * 1e12) / 1e12;
-
-// Change numbers divisible by zero to "nope"
-if (answer === Infinity) {
-    answer = "nope!"
-  }
-
-  return answer;
-}
-
-// Operate on the numbers
-const operate = function(operator, num1, num2) {
-  switch(operator) {
-    case '+':
-      result = add(num1, num2);
-      break;
-    case '-':
-      result = subtract(num1, num2);
-      break;
-    case 'x':
-      result = multiply(num1, num2);
-      break;
-    case '/':
-      result = divide(num1, num2);
-      break;
-    default:
-  }
- 
-  return result;
-}
-
-// Create a variable for the display, and assign to 0
-const mainDisplay = document.getElementById("main-display");
-
-// Display content is 0;
-mainDisplay.textContent = 0;
-
-// Create an array that stores the display value
-let displayNumber = [];
-let numberValue;
-
-// Add Click event to all buttons
-const getAllButtonElements = document.querySelectorAll("button");
-
-getAllButtonElements.forEach((button) => {
-  button.addEventListener("click", getButtonValues)
-});
-
-let count = 0;
-let newCalculation;
-let decimalCount = 0;
-let decimalPercent;
-let percentCount = 0;
-let splitOperation;
-let squareRoot;
+window.addEventListener("keydown", getKeyboardValues);
 
 // Calculator logic
-function getButtonValues(e) {
+function getKeyboardValues(e) {
+
+  keyVersion = document.querySelector(`button[data-key="${e.code}"]`);
+  if (keyVersion == null) return; // prevents null errors
+  keyValue = keyVersion.value;
+  
+  console.log(keyValue);
+
+  // Remove operator highlight class if equal button is entered
+  if (keyVersion === '=') {
+    operatorButtons.forEach((button) => {
+      button.classList.remove("click-highlight");
+    })
+  }
 
   function getCalculation() {
     if (operation.length > 0 && count > 0 && displayNumber.length === 0) {
@@ -101,7 +45,7 @@ function getButtonValues(e) {
       mainDisplay.textContent = Number(operation.join("")).toExponential(4);
     }
 
-    operator = e.target.value;
+    operator = keyValue;
     displayNumber = [];
     decimalCount = 0;
     numberValue = 0;
@@ -140,7 +84,7 @@ function getButtonValues(e) {
     squareRoot = undefined;
   }
 
-  switch(e.target.value) {
+  switch(keyValue) {
     case '0':
     case '1':
     case '2':
@@ -157,9 +101,9 @@ function getButtonValues(e) {
         if (operator === undefined) {
           operation = [];
         };
-        
+
         // Add each value to displayNumber array
-        displayNumber.push(e.target.value);
+        displayNumber.push(keyValue);
 
         // Don't allow more than one decimal point
         if (decimalCount === 0) {
@@ -167,7 +111,7 @@ function getButtonValues(e) {
             decimalCount++;
           }
         } else if (decimalCount > 0) {
-          if (e.target.value === '.') {
+          if (keyValue === '.') {
             // Cuts off 2nd decimal in array
             displayNumber.splice(-1,1);
           }
@@ -341,75 +285,14 @@ function getButtonValues(e) {
 
     break;
   }
-  console.error("decimal count: " + decimalCount)
-  console.log(displayNumber);
-  console.log("numberValue: " + numberValue);
-  console.log(number1);
-  console.log(number2);
-  console.log(operation);
-  console.log("operator: " + operator);
-  console.log(mainDisplay.textContent);
-  console.log("newCalculation: " + newCalculation);
-  console.log("percentCount: "+ percentCount);
- 
+  // console.error("decimal count: " + decimalCount)
+  // console.log(displayNumber);
+  // console.log("numberValue: " + numberValue);
+  // console.log(number1);
+  // console.log(number2);
+  // console.log(operation);
+  // console.log("operator: " + operator);
+  // console.log(mainDisplay.textContent);
+  // console.log("newCalculation: " + newCalculation);
+  // console.log("percentCount: "+ percentCount);
 }
-
-// group buttons!
-const numberButtons = document.querySelectorAll(".operand");
-const operatorButtons = document.querySelectorAll(".operator");
-const decimalButton = document.querySelector(".decimal");
-const equalsButton = document.querySelector(".equals");
-const signButton = document.querySelector(".sign");
-const clearButton = document.querySelector(".clear");
-const percentButton = document.querySelector(".percent");
-const sqrootButton = document.querySelector(".sqroot");
-
-// Highlight each button 
-numberButtons.forEach((button) => {
-  button.addEventListener("mousedown", buttonPressed);
-  button.addEventListener("mouseup", buttonPressed)
-});
-
-const groupButtons = [decimalButton, equalsButton, signButton, clearButton, percentButton, sqrootButton];
-
-groupButtons.forEach((button) => {
-  button.addEventListener("mousedown", buttonPressed);
-  button.addEventListener("mouseup", buttonPressed)
-
-});
-
-function buttonPressed(e) {
-  e.target.classList.toggle("click-highlight");
-
-  // Remove operator highlight class if equal button is click
-  if (e.target.value === '=') {
-    operatorButtons.forEach((button) => {
-      button.classList.remove("click-highlight");
-    })
-  }
-}
-
-// // A longer highlight for operator buttons, while each one clicks after another.
-
-// Source of this code: https://jsfiddle.net/giuseppe_straziota/s6s0yb2k/
-
-(function() {
-
-  for (var i = 0; i < operatorButtons.length; i++) { 
-    var button = operatorButtons[i]; 
-    button.addEventListener('click', function (e) { 
-      for (var i = 0; i < operatorButtons.length; i++) {
- 				var button2 = operatorButtons[i];
-        button2.classList.remove("click-highlight");
-      } 
-      this.classList.toggle("click-highlight");  
-    });
-  }
-
-})();
-
-
-// Final tasks:
-// attach data keys to buttons! for keyboard support
-
-
