@@ -51,7 +51,7 @@ const operate = function(operator, num1, num2) {
 const mainDisplay = document.getElementById("main-display");
 
 // Display content is 0;
-mainDisplay.textContent = 0;
+mainDisplay.textContent = 'Made by Vic';
 
 // Create an array that stores the display value
 let displayNumber = [];
