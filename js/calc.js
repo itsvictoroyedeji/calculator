@@ -162,6 +162,11 @@ function getButtonValues(e) {
         // Add each value to displayNumber array
         displayNumber.push(e.target.value);
 
+        // Limit Display Number input to 10 characters
+        if (displayNumber.length > 10) {
+          displayNumber.splice(-1,1);
+        }
+
         // Don't allow more than one decimal point
         if (decimalCount === 0) {
           if (displayNumber.includes('.')) {
@@ -307,40 +312,65 @@ function getButtonValues(e) {
 
       break;
     
-    case 'sign':
-      // Code to execute after = is pressed.
-      if (operation.length !== 0 && numberValue == 0 ) {
-        if (Number(operation) > 0) {
-          splitOperation = String(operation).split("");
-          splitOperation.unshift("-");
-          mainDisplay.textContent = Number(splitOperation.join(""));
-
-          newCalculation = Number(splitOperation.join(""));
-          operation = [newCalculation];
-
-        } else if (Number(operation) < 0) {
-          splitOperation = String(operation).split("");
-          splitOperation.splice(0,1);
-          mainDisplay.textContent = Number(splitOperation.join(""));
-
-          newCalculation = Number(splitOperation.join(""));
-          operation = [newCalculation];
+      case 'sign':
+        // Code to execute after = is pressed.
+        if (operation.length !== 0 && numberValue == 0 ) {
+          if (Number(operation) > 0) {
+            splitOperation = String(operation).split("");
+            splitOperation.unshift("-");
+            mainDisplay.textContent = Number(splitOperation.join(""));
+  
+            newCalculation = Number(splitOperation.join(""));
+            operation = [newCalculation];
+  
+          } else if (Number(operation) < 0) {
+            splitOperation = String(operation).split("");
+            splitOperation.splice(0,1);
+            mainDisplay.textContent = Number(splitOperation.join(""));
+  
+            newCalculation = Number(splitOperation.join(""));
+            operation = [newCalculation];
+          }
+  
+          if (splitOperation.join("").length > 10) {
+            console.error("length1" )
+            mainDisplay.textContent = Number(splitOperation.join("")).toFixed(1);
+          }
+  
+          if (Number(splitOperation.join("")) > 10000000 || Number(splitOperation.join("")) < -10000000) {
+            console.error("length2" );
+            mainDisplay.textContent = Number(splitOperation.join("")).toExponential(4);
+          }
+  
+        // Code to execute before = is pressed.
+        } else if (numberValue >= 0) {
+          // make number negative
+        
+          displayNumber.unshift("-");
+          mainDisplay.textContent = displayNumber.join("");
+          numberValue = Number(mainDisplay.textContent);
+  
+          if (mainDisplay.textContent.length > 10) {
+            // console.log("length1" )
+         
+            mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+           
+          }
+  
+        } else if (Number(numberValue < 0)) {
+          // make number positive
+          displayNumber.shift();
+          mainDisplay.textContent = displayNumber.join("");
+          numberValue = Number(mainDisplay.textContent);
+  
+          if (mainDisplay.textContent.length > 10) {
+            // console.log("length1" )
+        
+            mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
         }
-      // Code to execute before = is pressed.
-      } else if (Number(displayNumber.join("")) >= 0) {
-        // make number negative
-        displayNumber.unshift("-");
-        mainDisplay.textContent = displayNumber.join("");
-        numberValue = Number(mainDisplay.textContent);
-
-      } else if (Number(displayNumber.join("")) < 0) {
-        // make number positive
-        displayNumber.shift();
-        mainDisplay.textContent = displayNumber.join("");
-        numberValue = Number(mainDisplay.textContent);
       }
-
-    break;
+  
+      break;
   }
   console.error("decimal count: " + decimalCount)
   console.log(displayNumber);

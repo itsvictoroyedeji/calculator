@@ -112,7 +112,6 @@ function getKeyboardValues(e) {
             displayNumber.splice(-1,1);
 
           } else {
-            console.error("It's zero");
             displayNumber = [];
             // Display 0 on screen after all numbers have been removed
             mainDisplay.textContent = 0;
@@ -121,6 +120,11 @@ function getKeyboardValues(e) {
         } else {
         // Add each value to displayNumber array
         displayNumber.push(keyValue);
+        }
+
+        // Limit Display Number input to 9 characters
+        if (displayNumber.length > 10) {
+          displayNumber.splice(-1,1);
         }
 
         // Don't allow more than one decimal point
@@ -290,19 +294,44 @@ function getKeyboardValues(e) {
           newCalculation = Number(splitOperation.join(""));
           operation = [newCalculation];
         }
+
+        if (splitOperation.join("").length > 10) {
+          console.error("length1" )
+          mainDisplay.textContent = Number(splitOperation.join("")).toFixed(1);
+        }
+
+        if (Number(splitOperation.join("")) > 10000000 || Number(splitOperation.join("")) < -10000000) {
+          console.error("length2" );
+          mainDisplay.textContent = Number(splitOperation.join("")).toExponential(4);
+        }
+
       // Code to execute before = is pressed.
-      } else if (Number(displayNumber.join("")) >= 0) {
+      } else if (numberValue >= 0) {
         // make number negative
+      
         displayNumber.unshift("-");
         mainDisplay.textContent = displayNumber.join("");
         numberValue = Number(mainDisplay.textContent);
 
-      } else if (Number(displayNumber.join("")) < 0) {
+        if (mainDisplay.textContent.length > 10) {
+          // console.log("length1" )
+       
+          mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+         
+        }
+
+      } else if (Number(numberValue < 0)) {
         // make number positive
         displayNumber.shift();
         mainDisplay.textContent = displayNumber.join("");
         numberValue = Number(mainDisplay.textContent);
+
+        if (mainDisplay.textContent.length > 10) {
+          // console.log("length1" )
+      
+          mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
       }
+    }
 
     break;
   }
