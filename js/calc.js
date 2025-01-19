@@ -482,6 +482,12 @@ function keyPressed(e) {
   if (enterKeyElement == null) return; // prevents null errors
   enterKeyValue = enterKeyElement.value;
 
+  if (enterKeyValue) {
+    groupButtons.forEach((button) => {
+      button.blur()
+    });
+  }
+
   if (enterKeyValue === 'clear') {
     operatorButtons.forEach((button) => {
         button.classList.remove("click-highlight");
