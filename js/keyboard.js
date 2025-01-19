@@ -12,7 +12,7 @@ function getKeyboardValues(e) {
   if (keyVersion == null) return; // prevents null errors
   keyValue = keyVersion.value;
 
-  console.error(keyValue);
+  // console.error(keyValue);
 
   // Remove operator highlight class if equal button is entered
   if (keyVersion === '=') {
@@ -64,6 +64,7 @@ function getKeyboardValues(e) {
     numberValue = 0;
     // reset for new equation
     displayNumber = [];
+    splitOperation = [];
     decimalCount = 0;
     percentCount = 0;
     return operate(operator, number1, number2);
@@ -106,6 +107,8 @@ function getKeyboardValues(e) {
           operation = [];
         };
 
+
+
         // Removes element if Backspace is selected
         if (keyValue === 'backspace') {
           if (displayNumber.length > 1) {
@@ -113,8 +116,9 @@ function getKeyboardValues(e) {
 
           } else {
             displayNumber = [];
-            // Display 0 on screen after all numbers have been removed
-            mainDisplay.textContent = 0;
+            // // console.error("seo");
+            // // Display 0 on screen after all numbers have been removed
+            // mainDisplay.textContent = '0';
           }
           
         } else {
@@ -139,11 +143,18 @@ function getKeyboardValues(e) {
           }
         };
 
+        
         // Store number value in a variable, first!
         numberValue = Number(displayNumber.join(""));
 
-        // Display that value
-        mainDisplay.textContent = numberValue;
+        if (displayNumber.length == 0) {
+          // Display that value
+          mainDisplay.textContent = 0;
+        } else {
+          // Display that value
+          mainDisplay.textContent = displayNumber.join("");
+        }
+
 
         // Max length to display = 10. Cut off everything after
         if (displayNumber.join("").length > 10) {
@@ -190,7 +201,7 @@ function getKeyboardValues(e) {
       }
 
       // Reduce Big Numbers more than 10 digits
-      if (newCalculation > 1000000000) {
+      if (newCalculation > 1000000000 || newCalculation < -1000000) {
         mainDisplay.textContent = newCalculation.toExponential(4);
       }
 
@@ -234,7 +245,7 @@ function getKeyboardValues(e) {
     case 'percent':
       percentCount++;
 
-      if (percentCount < 4) {
+      if (percentCount < 6) {
         if (operation.length === 0) {
           // Code to execute before any operator (+,-,*,/)
           displayNumber = []
@@ -262,6 +273,7 @@ function getKeyboardValues(e) {
           numberValue = Number(operation) * decimalPercent;
 
         } else {
+          console.error("nummm");
           numberValue = Number(operation * 0.01);
           mainDisplay.textContent = Number(numberValue);
           newCalculation = Number(numberValue);
@@ -269,16 +281,51 @@ function getKeyboardValues(e) {
 
           if (mainDisplay.textContent.length > 10) {
             mainDisplay.textContent = Number(mainDisplay.textContent).toFixed(5);
+
+            mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
           }
+
+          if (Number(mainDisplay.textContent) > 10000000 || Number(mainDisplay.textContent) < -10000000) {
+            // console.error("length2" );
+            mainDisplay.textContent = Number(mainDisplay.textContent).toExponential(5);
+          }
+
+          // Reset Value to 0 so +/- can work
+          numberValue = 0;
         }
       }
 
       break;
     
     case 'sign':
-      // Code to execute after = is pressed.
-      if (operation.length !== 0 && numberValue == 0 ) {
+       // Code to execute for 2nd number in equation
+      if (operation.length !== 0 && numberValue == 0 && operator !== undefined) {
+        if (numberValue >= 0) {
+          // make number negative
+          // console.error("newfour");
+          displayNumber.unshift("-");
+          mainDisplay.textContent = displayNumber.join("");
+          numberValue = Number(mainDisplay.textContent);
+  
+          if (mainDisplay.textContent.length > 10) {
+            mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+          } 
+        } else if (numberValue < 0) {
+          // make number positive
+          // console.error("newfive");
+          displayNumber.shift();
+          mainDisplay.textContent = displayNumber.join("");
+          numberValue = Number(mainDisplay.textContent);
+  
+          if (mainDisplay.textContent.length > 10) {
+            mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+          }
+        }
+      } else if (operation.length !== 0 && numberValue == 0 ) {
+       // code to execute after = is pressed
         if (Number(operation) > 0) {
+ 
+          // console.error("one");
           splitOperation = String(operation).split("");
           splitOperation.unshift("-");
           mainDisplay.textContent = Number(splitOperation.join(""));
@@ -287,6 +334,7 @@ function getKeyboardValues(e) {
           operation = [newCalculation];
 
         } else if (Number(operation) < 0) {
+          // console.error("two");
           splitOperation = String(operation).split("");
           splitOperation.splice(0,1);
           mainDisplay.textContent = Number(splitOperation.join(""));
@@ -295,54 +343,55 @@ function getKeyboardValues(e) {
           operation = [newCalculation];
         }
 
+ 
         if (splitOperation.join("").length > 10) {
-          console.error("length1" )
-          mainDisplay.textContent = Number(splitOperation.join("")).toFixed(1);
+          // console.error("length1" )
+          mainDisplay.textContent = Number(splitOperation.join("")).toFixed(4);
         }
 
         if (Number(splitOperation.join("")) > 10000000 || Number(splitOperation.join("")) < -10000000) {
-          console.error("length2" );
+         
           mainDisplay.textContent = Number(splitOperation.join("")).toExponential(4);
         }
+
+        // numberValue = 0; // Reset numberValue
 
       // Code to execute before = is pressed.
       } else if (numberValue >= 0) {
         // make number negative
-      
+        // console.error("four");
         displayNumber.unshift("-");
         mainDisplay.textContent = displayNumber.join("");
         numberValue = Number(mainDisplay.textContent);
 
         if (mainDisplay.textContent.length > 10) {
-          // console.log("length1" )
-       
           mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
-         
         }
 
-      } else if (Number(numberValue < 0)) {
+      } else if (numberValue < 0) {
         // make number positive
+        // console.error("five");
         displayNumber.shift();
         mainDisplay.textContent = displayNumber.join("");
         numberValue = Number(mainDisplay.textContent);
 
         if (mainDisplay.textContent.length > 10) {
-          // console.log("length1" )
-      
           mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
       }
     }
 
     break;
   }
-  console.error("decimal count: " + decimalCount)
-  console.log(displayNumber);
-  console.log("numberValue: " + numberValue);
-  console.log(number1);
-  console.log(number2);
-  console.log(operation);
-  console.log("operator: " + operator);
-  console.log(mainDisplay.textContent);
-  console.log("newCalculation: " + newCalculation);
-  console.log("percentCount: "+ percentCount);
+  // console.error("decimal count: " + decimalCount)
+  // console.log(displayNumber);
+  // console.log("numberValue: " + numberValue);
+  // console.log(number1);
+  // console.log(number2);
+  // console.log(operation);
+  // console.log("operator: " + operator);
+  // console.log(mainDisplay.textContent);
+  // console.log("newCalculation: " + newCalculation);
+  // console.log("percentCount: "+ percentCount);
+  // console.log(splitOperation);
+
 }

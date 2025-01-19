@@ -119,6 +119,7 @@ function getButtonValues(e) {
     numberValue = 0;
     // reset for new equation
     displayNumber = [];
+    splitOperation = [];
     decimalCount = 0;
     percentCount = 0;
     return operate(operator, number1, number2);
@@ -179,16 +180,25 @@ function getButtonValues(e) {
           }
         }
 
-        // Convert display array value to String (to show decimals during input), then DISPLAY on calculator screen
-        mainDisplay.textContent = displayNumber.join("");
+        // Store number value in a variable
+        numberValue = Number(displayNumber.join(""));
 
-        // Max length to display = 10. Cut off everything after
-        if (mainDisplay.textContent.length > 10) {
-          mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
+        if (displayNumber.length == 0) {
+          // Display that value
+          mainDisplay.textContent = 0;
+        } else {
+          // Display that value
+          mainDisplay.textContent = displayNumber.join("");
         }
 
-        // Store number value in a variable
-        numberValue = Number(mainDisplay.textContent);
+        // Max length to display = 10. Cut off everything after
+        if (displayNumber.join("").length > 10) {
+          mainDisplay.textContent = displayNumber.join("").substring(0,10);
+
+          // And Store updated number value in a variable
+           numberValue = Number(displayNumber.join("").substring(0,10));
+        }
+       
       };
 
       getNumber();
@@ -227,7 +237,7 @@ function getButtonValues(e) {
       }
 
       // Reduce Big Numbers more than 10 digits
-      if (newCalculation > 1000000000) {
+      if (newCalculation > 1000000000 || newCalculation < -1000000) {
         mainDisplay.textContent = newCalculation.toExponential(4);
       }
 
@@ -271,7 +281,7 @@ function getButtonValues(e) {
     case 'percent':
       percentCount++;
 
-      if (percentCount < 4) {
+      if (percentCount < 6) {
         if (operation.length === 0) {
           // Code to execute before any operator (+,-,*,/)
           displayNumber = []
@@ -306,82 +316,118 @@ function getButtonValues(e) {
 
           if (mainDisplay.textContent.length > 10) {
             mainDisplay.textContent = Number(mainDisplay.textContent).toFixed(5);
+
+            mainDisplay.textContent = mainDisplay.textContent.substring(0,10);
           }
+
+          if (Number(mainDisplay.textContent) > 10000000 || Number(mainDisplay.textContent) < -10000000) {
+            
+            mainDisplay.textContent = Number(mainDisplay.textContent).toExponential(5);
+          }
+     
+          // Reset Value to 0 so +/- can work
+          numberValue = 0;
         }
       }
 
       break;
     
-      case 'sign':
-        // Code to execute after = is pressed.
-        if (operation.length !== 0 && numberValue == 0 ) {
-          if (Number(operation) > 0) {
-            splitOperation = String(operation).split("");
-            splitOperation.unshift("-");
-            mainDisplay.textContent = Number(splitOperation.join(""));
-  
-            newCalculation = Number(splitOperation.join(""));
-            operation = [newCalculation];
-  
-          } else if (Number(operation) < 0) {
-            splitOperation = String(operation).split("");
-            splitOperation.splice(0,1);
-            mainDisplay.textContent = Number(splitOperation.join(""));
-  
-            newCalculation = Number(splitOperation.join(""));
-            operation = [newCalculation];
-          }
-  
-          if (splitOperation.join("").length > 10) {
-            console.error("length1" )
-            mainDisplay.textContent = Number(splitOperation.join("")).toFixed(1);
-          }
-  
-          if (Number(splitOperation.join("")) > 10000000 || Number(splitOperation.join("")) < -10000000) {
-            console.error("length2" );
-            mainDisplay.textContent = Number(splitOperation.join("")).toExponential(4);
-          }
-  
-        // Code to execute before = is pressed.
-        } else if (numberValue >= 0) {
+    case 'sign':
+      // Code to execute for 2nd number in equation
+      if (operation.length !== 0 && numberValue == 0 && operator !== undefined) {
+        if (numberValue >= 0) {
           // make number negative
-        
+          // console.error("newfour");
           displayNumber.unshift("-");
           mainDisplay.textContent = displayNumber.join("");
           numberValue = Number(mainDisplay.textContent);
   
           if (mainDisplay.textContent.length > 10) {
-            // console.log("length1" )
-         
             mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
-           
-          }
-  
-        } else if (Number(numberValue < 0)) {
+          } 
+        } else if (numberValue < 0) {
           // make number positive
+          // console.error("newfive");
           displayNumber.shift();
           mainDisplay.textContent = displayNumber.join("");
           numberValue = Number(mainDisplay.textContent);
   
           if (mainDisplay.textContent.length > 10) {
-            // console.log("length1" )
-        
             mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+          }
         }
+      } else if (operation.length !== 0 && numberValue == 0 ) {
+       // code to execute after = is pressed
+        if (Number(operation) > 0) {
+ 
+          // console.error("one");
+          splitOperation = String(operation).split("");
+          splitOperation.unshift("-");
+          mainDisplay.textContent = Number(splitOperation.join(""));
+
+          newCalculation = Number(splitOperation.join(""));
+          operation = [newCalculation];
+
+        } else if (Number(operation) < 0) {
+          // console.error("two");
+          splitOperation = String(operation).split("");
+          splitOperation.splice(0,1);
+          mainDisplay.textContent = Number(splitOperation.join(""));
+
+          newCalculation = Number(splitOperation.join(""));
+          operation = [newCalculation];
+        }
+
+ 
+        if (splitOperation.join("").length > 10) {
+          // console.error("length1" )
+          mainDisplay.textContent = Number(splitOperation.join("")).toFixed(4);
+        }
+
+        if (Number(splitOperation.join("")) > 10000000 || Number(splitOperation.join("")) < -10000000) {
+         
+          mainDisplay.textContent = Number(splitOperation.join("")).toExponential(4);
+        }
+
+        // numberValue = 0; // Reset numberValue
+
+      // Code to execute before = is pressed.
+      } else if (numberValue >= 0) {
+        // make number negative
+        // console.error("four");
+        displayNumber.unshift("-");
+        mainDisplay.textContent = displayNumber.join("");
+        numberValue = Number(mainDisplay.textContent);
+
+        if (mainDisplay.textContent.length > 10) {
+          mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
+        }
+
+      } else if (numberValue < 0) {
+        // make number positive
+        // console.error("five");
+        displayNumber.shift();
+        mainDisplay.textContent = displayNumber.join("");
+        numberValue = Number(mainDisplay.textContent);
+
+        if (mainDisplay.textContent.length > 10) {
+          mainDisplay.textContent = Number(displayNumber.join("")).toExponential(5);
       }
-  
-      break;
+    }
+
+    break;
   }
-  console.error("decimal count: " + decimalCount)
-  console.log(displayNumber);
-  console.log("numberValue: " + numberValue);
-  console.log(number1);
-  console.log(number2);
-  console.log(operation);
-  console.log("operator: " + operator);
-  console.log(mainDisplay.textContent);
-  console.log("newCalculation: " + newCalculation);
-  console.log("percentCount: "+ percentCount);
+  // console.error("decimal count: " + decimalCount)
+  // console.log(displayNumber);
+  // console.log("numberValue: " + numberValue);
+  // console.log(number1);
+  // console.log(number2);
+  // console.log(operation);
+  // console.log("operator: " + operator);
+  // console.log(mainDisplay.textContent);
+  // console.log("newCalculation: " + newCalculation);
+  // console.log("percentCount: "+ percentCount);
+  // console.log(splitOperation);
 
 }
 
@@ -405,6 +451,8 @@ numberButtons.forEach((button) => {
 
 const groupButtons = [decimalButton, equalsButton, signButton, clearButton, percentButton, sqrootButton];
 
+const groupWithoutEquals = [decimalButton, signButton, clearButton, percentButton, sqrootButton];
+
 groupButtons.forEach((button) => {
   button.addEventListener("mousedown", buttonPressed);
   button.addEventListener("mouseup", buttonPressed)
@@ -415,14 +463,56 @@ function buttonPressed(e) {
   e.target.classList.toggle("click-highlight");
 
   // Remove operator highlight class if equal button is click
-  if (e.target.value == '=') {
+  if (e.target.value == '=' || e.target.value == 'clear') {
     operatorButtons.forEach((button) => {
       button.classList.remove("click-highlight");
     })
   }
 }
 
-// A longer highlight for operator buttons, while each one clicks after another.
+let enterKeyElement;
+let enterKeyValue;
+
+window.addEventListener("keydown", keyPressed);
+
+function keyPressed(e) {
+  
+  enterKeyElement = document.querySelector(`button[data-key="${e.code}"]`);
+
+  if (enterKeyElement == null) return; // prevents null errors
+  enterKeyValue = enterKeyElement.value;
+
+  if (enterKeyValue === 'clear') {
+    operatorButtons.forEach((button) => {
+        button.classList.remove("click-highlight");
+    })
+  }
+
+  if (enterKeyValue === '=') {
+    operatorButtons.forEach((button) => {
+        button.classList.remove("click-highlight");
+    })
+    
+    groupWithoutEquals.forEach((button) => {
+      // Removes focus from element after '=' is pressed
+      button.blur()
+    });
+  } else {
+    operatorButtons.forEach((button) => {
+      // Removes focus from element after '=' is pressed
+      button.blur()
+    });
+    numberButtons.forEach((button) => {
+      // Removes focus from element after '=' is pressed
+      button.blur()
+    });
+
+    
+
+  }
+}
+
+// A longer highlight for operator buttons, each one highlights after one is clicked.
 
 // Source of this code: https://jsfiddle.net/giuseppe_straziota/s6s0yb2k/
 
@@ -441,6 +531,3 @@ function buttonPressed(e) {
 
 })();
 
-
-// Final tasks:
-// attach data keys to buttons! for keyboard support
