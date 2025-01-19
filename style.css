@@ -208,7 +208,7 @@ button.click-highlight {
 
 @media (max-width: 480px) {
   :root {
-    --box-contain-width: 100%;
+    --box-contain-width: 95%;
   }
 
   #buttons {
@@ -220,7 +220,7 @@ button.click-highlight {
   }
 
   button {
-    flex: 1 0 21%;
+    flex: 1 0 20%;
     font-size: 1.7em;
   }
 
