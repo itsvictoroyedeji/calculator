@@ -486,17 +486,21 @@ function keyPressed(e) {
     operatorButtons.forEach((button) => {
         button.classList.remove("click-highlight");
     })
+
+    groupButtons.forEach((button) => {
+      button.blur()
+    });
   }
 
   if (enterKeyValue === '=') {
     operatorButtons.forEach((button) => {
         button.classList.remove("click-highlight");
     })
-    
     groupWithoutEquals.forEach((button) => {
       // Removes focus from element after '=' is pressed
       button.blur()
     });
+
   } else {
     operatorButtons.forEach((button) => {
       // Removes focus from element after '=' is pressed
@@ -506,9 +510,7 @@ function keyPressed(e) {
       // Removes focus from element after '=' is pressed
       button.blur()
     });
-
     
-
   }
 }
 
