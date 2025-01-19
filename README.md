@@ -10,7 +10,7 @@ It doesn't matter if you don't have a freakin' clue when you start working on it
 
 ...and you got yourself a calculator.
 
-Here was my design [inspiration][1]. Here was my functionality [inspiration] that I got from The Odin Project.[2].
+Here was my design [inspiration][1]. Here was a working calculator [inspiration][2] that I got from The Odin Project.
 
 Have fun!
 
