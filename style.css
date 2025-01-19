@@ -175,8 +175,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
-  flex: 1 1 14%;
   border-radius: 15px;
+  flex: 1 60px;
   height: 54px;
   font-size: 1.9em;
   color: #fff;
@@ -206,7 +206,7 @@ button.click-highlight {
   background-color: #f9b13f;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   :root {
     --box-contain-width: 100%;
   }
@@ -217,6 +217,11 @@ button.click-highlight {
 
   #container {
     width: 100%;
+  }
+
+  button {
+    flex: 1 0 21%;
+    font-size: 1.7em;
   }
 
   #main-display {
