@@ -211,23 +211,31 @@ button.click-highlight {
     --box-contain-width: 95%;
   }
 
-  #buttons {
-    gap: 7px;
-}
+  #calculator {
+    margin: 0px 15px;
+  }
 
   #container {
     width: 100%;
   }
 
+  #main-display {
+    font-size: 2.8em;
+    padding: 16px 10px 14px 10px;
+  }
+
+  #buttons {
+    gap: 5px;
+  }
+
   button {
-    flex: 1 0 20%;
+    flex: 1 11%;
     font-size: 1.7em;
   }
 
-  #main-display {
-    font-size: 2.8em;
-    padding: 12px 10px 24px 10px;
-  }
+  .clear {
+    font-size: 1.4em;
+}
 
 }
 
