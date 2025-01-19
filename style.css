@@ -175,8 +175,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
+  flex: 1 0 21%;
   border-radius: 15px;
-  flex: 1 60px;
   height: 54px;
   font-size: 1.9em;
   color: #fff;
@@ -208,6 +208,22 @@ button.click-highlight {
 
 @media (max-width: 360px) {
   :root {
+    --box-contain-width: 100%;
+  }
+
+  #container {
+    width: 100%;
+  }
+
+  #main-display {
+    font-size: 2.8em;
+    padding: 12px 10px 24px 10px;
+  }
+
+}
+
+/* @media (max-width: 360px) {
+  :root {
     --box-contain-width: 300px;
   }
 
@@ -228,7 +244,6 @@ button.click-highlight {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    /* width: var(--box-contain-width); */
     gap: 2px;
     padding: 13px;
     margin: 0px 20px;
@@ -277,4 +292,4 @@ button.click-highlight {
   button {
     flex: 1 47px;
   }
-}
+} */
