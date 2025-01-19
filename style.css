@@ -175,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
-  flex: 1 0 21%;
+  flex: 1 1 21%;
   border-radius: 15px;
   height: 54px;
   font-size: 1.9em;
