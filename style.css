@@ -211,6 +211,10 @@ button.click-highlight {
     --box-contain-width: 100%;
   }
 
+  #buttons {
+    gap: 7px;
+}
+
   #container {
     width: 100%;
   }
