@@ -227,25 +227,26 @@ button.click-highlight {
     border-radius: 31px;
     display: flex;
     flex-wrap: wrap;
-    width: var(--box-contain-width);
+    width: 100%;
+    /* width: var(--box-contain-width); */
     gap: 2px;
     padding: 13px;
-    margin: 0px 15px;
-  }
+    margin: 0px 20px;
+}
 
-  #main-display {
-    font-family: "Digital 7", "Lato", serif;
-    font-weight: 400;
-    background-color: #f9b13f;
-    display: flex;
-    justify-content: flex-end;
-    font-size: 2.8em;
-    padding: 13px 10px 22px 10px;
-    border-radius: 16px;
-    flex: 1;
-    margin: 6px 0 20px;
-    letter-spacing: 1.8px;
-  }
+#main-display {
+  font-family: "Digital 7", "Lato", serif;
+  font-weight: 400;
+  background-color: #f9b13f;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 2.5em;
+  padding: 13px 10px 22px 10px;
+  border-radius: 16px;
+  flex: 1;
+  margin: 6px 0 20px;
+  letter-spacing: 1.8px;
+}
 
   #buttons {
     display: flex;
