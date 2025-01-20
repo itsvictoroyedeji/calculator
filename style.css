@@ -255,7 +255,7 @@ button.click-highlight {
   #calculator {
     margin: 0px 15px;
     height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   #main-display {
