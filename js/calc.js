@@ -51,7 +51,7 @@ const operate = function(operator, num1, num2) {
 const mainDisplay = document.getElementById("main-display");
 
 // Display content is 0;
-mainDisplay.textContent = 'Go Retro!';
+mainDisplay.textContent = 'Go Retro!!';
 
 // Create an array that stores the display value
 let displayNumber = [];
@@ -443,6 +443,17 @@ const clearButton = document.querySelector(".clear");
 const percentButton = document.querySelector(".percent");
 const sqrootButton = document.querySelector(".sqroot");
 
+// Prevent scrolling on entire document
+document.addEventListener('dblclick', function(event) {
+  event.preventDefault();
+});
+
+document.addEventListener('wheel', function(event) {
+  if (event.ctrlKey) {
+    event.preventDefault();
+  }
+});
+
 // Highlight each button 
 numberButtons.forEach((button) => {
   button.addEventListener("mousedown", buttonPressed);
@@ -486,6 +497,8 @@ function keyPressed(e) {
     groupButtons.forEach((button) => {
       button.blur()
     });
+
+    
   }
 
   if (enterKeyValue === 'clear') {

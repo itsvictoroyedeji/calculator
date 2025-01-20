@@ -224,20 +224,23 @@ button.click-highlight {
     padding: 16px 10px 14px 10px;
   }
 
-  button {
+    button {
     font-size: 1.7em;
-    flex: 1 0 14%;
+    flex: 1 0 11%;
   }
 
   #buttons {
     gap: 5px;
   }
 
-
-
   .clear {
     font-size: 1.4em;
 }
+
+  .decimal {
+    font-size: 1.3em;
+    padding-bottom: 3px;
+  }
 
 }
 
