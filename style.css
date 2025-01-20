@@ -4,26 +4,26 @@
 
 @font-face {
   font-family: "Digital 7";
-  src: url('./digital-7/digital-7.woff2') format('woff2');
+  src: url('./fonts/digital-7.woff2') format('woff2');
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Digital 7";
-  src: url('./digital-7/digital-7-italic.woff2') format('woff2');
+  src: url('./fonts/digital-7-italic.woff2') format('woff2');
   font-style: italic;
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Digital 7 Mono";
-  src: url('./digital-7/digital-7-mono.woff2') format('woff2');
+  src: url('./fonts/digital-7-mono.woff2') format('woff2');
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Digital 7 Mono";
-  src: url('./digital-7/digital-7-mono-italic.woff2') format('woff2');
+  src: url('./fonts/digital-7-mono-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
@@ -226,7 +226,7 @@ button.click-highlight {
   }
 
   #main-display {
-    padding: 17px 10px 14px 10px;
+    padding: 20px 10px 18px 10px;
   }
 
   #buttons {
