@@ -177,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
 
 button {
   border-radius: 15px;
-  flex: 1 0 21%;
+  flex: 1 0 calc(25% - 10px);
   height: 54px;
   font-size: 1.9em;
   color: #fff;
@@ -224,9 +224,9 @@ button.click-highlight {
     padding: 16px 10px 14px 10px;
   }
 
-    button {
+  button {
     font-size: 1.7em;
-    flex: 1 0 11%;
+    flex: 1 0 calc(25% - 10px);
   }
 
   #buttons {

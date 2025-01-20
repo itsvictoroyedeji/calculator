@@ -489,7 +489,7 @@ window.addEventListener("keydown", keyPressed);
 function keyPressed(e) {
   
   enterKeyElement = document.querySelector(`button[data-key="${e.code}"]`);
-
+ 
   if (enterKeyElement == null) return; // prevents null errors
   enterKeyValue = enterKeyElement.value;
 
