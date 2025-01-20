@@ -209,13 +209,12 @@ button.click-highlight {
 
 @media screen and (max-width: 480px) {
 
-
   #calculator {
     margin: 0px 15px;
   }
 
   #container {
-    width: 100%;
+    width: 80%;
     padding: 10px;
   }
 
@@ -243,75 +242,3 @@ button.click-highlight {
   }
 
 }
-
-/* @media (max-width: 360px) {
-  :root {
-    --box-contain-width: 300px;
-  }
-
-  #calculator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 95vh;
-    height: 100vh;
-    overflow: hidden;
-    flex-direction: column;
-  }
-  
-  #container {
-    background-color: #0d1a1a;
-    border: 9px solid #0d1a1a;
-    border-radius: 31px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    gap: 2px;
-    padding: 13px;
-    margin: 0px 20px;
-}
-
-#main-display {
-  font-family: "Digital 7", "Lato", serif;
-  font-weight: 400;
-  background-color: #f9b13f;
-  display: flex;
-  justify-content: flex-end;
-  font-size: 2.5em;
-  padding: 13px 10px 22px 10px;
-  border-radius: 16px;
-  flex: 1;
-  margin: 6px 0 20px;
-  letter-spacing: 1.8px;
-}
-
-  #buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  button {
-    border-radius: 15px;
-    flex: 1 60px;
-    height: 39px;
-    font-size: 1.6em;
-    color: #fff;
-    background-color: #4b7069;
-    border-width: 1px;
-    cursor: pointer;
-  }
-
-  .decimal {
-    font-size: 1.2em;
-    padding-bottom: 3px;
-  }
-
-  .clear {
-    font-size: 1.2em;
-  }
-
-  button {
-    flex: 1 47px;
-  }
-} */
