@@ -229,7 +229,7 @@ button.click-highlight {
   }
 
   button {
-    flex: 1 11%;
+    flex: 1 0 11%;
     font-size: 1.7em;
   }
 

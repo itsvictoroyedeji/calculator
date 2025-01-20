@@ -51,7 +51,7 @@ const operate = function(operator, num1, num2) {
 const mainDisplay = document.getElementById("main-display");
 
 // Display content is 0;
-mainDisplay.textContent = 'Go Retro3';
+mainDisplay.textContent = 'Go Retro4';
 
 // Create an array that stores the display value
 let displayNumber = [];
