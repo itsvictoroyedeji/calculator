@@ -146,7 +146,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 10px solid #0d1a1a;
   border-radius: 31px;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+  flex-direction: column;
   width: var(--box-contain-width);
   gap: 4px;
   padding: 18px;
@@ -206,10 +207,8 @@ button.click-highlight {
   background-color: #f9b13f;
 }
 
-@media (max-width: 480px) {
-  :root {
-    --box-contain-width: 95%;
-  }
+@media screen and (max-width: 480px) {
+
 
   #calculator {
     margin: 0px 15px;
@@ -217,10 +216,11 @@ button.click-highlight {
 
   #container {
     width: 100%;
+    padding: 10px;
   }
 
   #main-display {
-    font-size: 2.8em;
+    font-size: 2.9em;
     padding: 16px 10px 14px 10px;
   }
 
