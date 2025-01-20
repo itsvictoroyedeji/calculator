@@ -138,6 +138,8 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 95vh;
   height: inherit;
   overflow-x: hidden;
+  height: inherit;
+  overflow-x: hidden;
   flex-direction: column;
 }
 
@@ -227,7 +229,7 @@ button.click-highlight {
   }
 
   #main-display {
-    padding: 16px 10px 19px 10px;
+    padding: 18px 10px 19px 10px;
   }
 
   #buttons {
