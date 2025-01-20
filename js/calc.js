@@ -443,16 +443,11 @@ const clearButton = document.querySelector(".clear");
 const percentButton = document.querySelector(".percent");
 const sqrootButton = document.querySelector(".sqroot");
 
-// Prevent scrolling on entire document
+// No zoom on double-click of buttons
 document.addEventListener('dblclick', function(event) {
   event.preventDefault();
 });
 
-document.addEventListener('wheel', function(event) {
-  if (event.ctrlKey) {
-    event.preventDefault();
-  }
-});
 
 // Highlight each button 
 numberButtons.forEach((button) => {

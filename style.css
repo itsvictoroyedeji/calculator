@@ -207,14 +207,19 @@ button.click-highlight {
   background-color: #f9b13f;
 }
 
-@media screen and (max-width: 480px) {
+@media (min-width: 1400px) {
+  #main-display {
+    padding: 15px 10px 19px 10px;
+  }
+}
 
+@media screen and (max-width: 480px) {
   #calculator {
     margin: 0px 15px;
   }
 
   #container {
-    width: 80%;
+    width: 100%;
     padding: 10px;
   }
 
@@ -224,8 +229,9 @@ button.click-highlight {
   }
 
   button {
-    font-size: 1.7em;
+    font-size: 1.2em;
     flex: 1 0 calc(25% - 10px);
+    height: 40px;
   }
 
   #buttons {
@@ -233,11 +239,11 @@ button.click-highlight {
   }
 
   .clear {
-    font-size: 1.4em;
+    font-size: 1.1em;
 }
 
   .decimal {
-    font-size: 1.3em;
+    font-size: 1.1em;
     padding-bottom: 3px;
   }
 
