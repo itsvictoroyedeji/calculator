@@ -50,8 +50,9 @@ const operate = function(operator, num1, num2) {
 // Create a variable for the display, and assign to 0
 const mainDisplay = document.getElementById("main-display");
 
-// Display content is 0;
-mainDisplay.textContent = "it's mlk day";
+const todaysDate = new Date();
+// Initial display
+mainDisplay.textContent = `${todaysDate.getMonth()+1}/${todaysDate.getDate()}/${todaysDate.getFullYear()}`;
 
 // Create an array that stores the display value
 let displayNumber = [];
