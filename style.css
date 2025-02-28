@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: flex-end;
   font-size: 3.8em;
-  padding: 15px 10px 27px 10px;
+  padding: 20px 10px 16px 10px;
   border-radius: 16px;
   flex: 1;
   margin: 6px 0 20px;
@@ -229,7 +229,7 @@ button.click-highlight {
   }
 
   #main-display {
-    padding: 18px 10px 19px 10px;
+    padding: 21px 10px 19px 10px;
   }
 
   #buttons {
